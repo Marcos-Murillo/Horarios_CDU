@@ -21,7 +21,7 @@ export default function GroupDetailPage() {
   const [activeTab, setActiveTab] = useState<"horarios" | "equipo">("horarios")
 
   const currentGroup = CULTURAL_GROUPS.find((g) => g.name === groupName)
-  const backgroundImage = currentGroup?.background || "/ascun.jpg"
+  const backgroundImage = currentGroup?.background || "/images/backgrounds/vole arena masculino editada - IMG_4309.jpg"
   const groupColor = currentGroup?.color || generateGroupColor(groupName)
 
   useEffect(() => {
