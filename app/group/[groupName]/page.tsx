@@ -137,7 +137,7 @@ export default function GroupDetailPage() {
             onClick={() => router.push("/")}
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
-            Grupos culturales
+            Grupos deportivos
           </Button>
 
           {/* Hero card */}
@@ -369,12 +369,12 @@ export default function GroupDetailPage() {
             </p>
             <div className="flex flex-wrap gap-3">
               <a
-                href="mailto:areacultura.cdr@correounivalle.edu.co"
+                href="mailto:deporte.representativo@correounivalle.edu.co"
                 className="flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium text-white/90 border border-white/20 hover:bg-white/10 transition-colors"
                 style={{ background: "rgba(255,255,255,0.08)" }}
               >
                 <Mail className="h-4 w-4 text-amber-400" />
-                areacultura.cdr@correounivalle.edu.co
+                deporte.representativo@correounivalle.edu.co
               </a>
               <a
                 href="https://www.instagram.com/culturarecreadeporteunivalle/"
