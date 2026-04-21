@@ -219,7 +219,7 @@ export default function HomePage() {
       <div
         className="fixed inset-0 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: `url('/ascun.jpg')`,
+          backgroundImage: `url('/images/backgrounds/vole arena masculino editada - IMG_4309.jpg')`,
         }}
       >
         <div className="absolute inset-0 bg-black/60"></div>
