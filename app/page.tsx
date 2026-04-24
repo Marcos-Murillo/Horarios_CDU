@@ -20,6 +20,7 @@ export default function HomePage() {
   const [allSchedules, setAllSchedules] = useState<Schedule[]>([])
   const [initialLoading, setInitialLoading] = useState(true)
   const [search, setSearch] = useState("")
+  const [categoryFilter, setCategoryFilter] = useState<"todos" | "representativo" | "semillero" | "funcionarios">("todos")
 
   useEffect(() => {
     fetchAllSchedules()
@@ -270,7 +271,7 @@ export default function HomePage() {
           </div>
 
           {/* Buscador */}
-          <div className="max-w-md mx-auto mb-6 sm:mb-8">
+          <div className="max-w-md mx-auto mb-4 sm:mb-5">
             <div
               className="flex items-center gap-3 px-4 py-3 rounded-2xl"
               style={{
@@ -298,6 +299,24 @@ export default function HomePage() {
               )}
             </div>
           </div>
+
+          {/* Filtros de categoría */}
+          <div className="flex flex-wrap justify-center gap-2 mb-6 sm:mb-8">
+            {(["todos", "representativo", "semillero", "funcionarios"] as const).map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setCategoryFilter(cat)}
+                className="px-4 py-1.5 rounded-full text-xs font-semibold transition-all capitalize"
+                style={
+                  categoryFilter === cat
+                    ? { background: "rgba(255,255,255,0.9)", color: "#111" }
+                    : { background: "rgba(255,255,255,0.12)", color: "rgba(255,255,255,0.75)", border: "1px solid rgba(255,255,255,0.2)" }
+                }
+              >
+                {cat === "todos" ? "Todos" : cat.charAt(0).toUpperCase() + cat.slice(1)}
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* Cultural Groups List */}
@@ -321,8 +340,11 @@ export default function HomePage() {
           ) : (
             <div className="grid gap-2 sm:gap-3 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
               {CULTURAL_GROUPS.filter((group) =>
-                group.shortName.toLowerCase().includes(search.toLowerCase()) ||
-                group.name.toLowerCase().includes(search.toLowerCase())
+                (group.shortName.toLowerCase().includes(search.toLowerCase()) ||
+                group.name.toLowerCase().includes(search.toLowerCase())) &&
+                (categoryFilter === "todos" ||
+                  group.name.toLowerCase().includes(categoryFilter) ||
+                  group.id.toLowerCase().includes(categoryFilter))
               ).map((group) => {
                 return (
                   <Card
@@ -344,7 +366,7 @@ export default function HomePage() {
                               className="font-semibold text-xs sm:text-sm text-white leading-tight line-clamp-2"
                               title={group.name}
                             >
-                              {group.shortName}
+                              {group.name}
                             </h3>
                             <p className="text-xs text-white/60 mt-0.5 sm:mt-1">Ver horarios</p>
                           </div>
@@ -401,7 +423,7 @@ export default function HomePage() {
                   )}
                   <div className="flex-1 min-w-0">
                     <DialogTitle className="text-white font-bold text-sm sm:text-base truncate">
-                      {group?.shortName || modalGroup}
+                      {group?.name || modalGroup}
                     </DialogTitle>
                     <p className="text-white/50 text-xs mt-0.5">Horarios semanales</p>
                   </div>
